@@ -1,0 +1,5 @@
+exportPattern("^[[:alpha:]]+")
+importFrom("graphics", "par")
+importFrom("methods", "is")
+importFrom("stats", "aggregate", "na.omit", "quantile")
+importFrom("utils", "stack")
