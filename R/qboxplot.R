@@ -35,9 +35,9 @@ qboxplot = function(x, range=1.5, probs=c(0.25,0.5,0.75), qtype=7, data=parent.f
 	group = numeric(0)
 	outliers = aggregate(formula, data=data, FUN=qboxplot.stats, probs=probs, qtype=qtype,
                              range=range, output="outliers")
-	for(i in 1:length(outliers[,1])) {
-		out = c(out, outliers[[i,n]])
-		group = c(group, rep(i,length(outliers[[i,n]])))
+	for (i in 1:nrow(outliers)) {
+	  out = c(out, unlist(outliers[i, n]))
+	  group = c(group, rep(i, length(unlist(outliers[i, n]))))
 	}
 
 	#get sample size

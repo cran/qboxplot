@@ -13,11 +13,11 @@ qboxplot(x, range=1.5, probs=c(0.25,0.5,0.75), qtype=7, data=parent.frame(),
 \item{x}{ a formula, such as \code{y ~ grp}, where \code{y} is a numeric vector of data values to be split into groups according to the grouping variable \code{grp} (usually a factor), or a data frame specifying data from which the boxplots are to be produced. }
 \item{range}{ this determines how far the plot whiskers extend out from the box. If \code{range} is positive, the whiskers extend to the most extreme data point which is no more than \code{range} times the difference between the value of the upper hinge and the value of the lower hinge from the box. A value of zero causes the whiskers to extend to the data extremes. }
 \item{probs}{ numeric vector of values in [0,1] specifying the percentiles of the upper hinge, the midpoint (usually the median) and the lower hinge. }
-\item{qtype}{ an integer between 1 and 9 selecting one of the nine quantile algorithms detailed below to be used (see \code{\link{quantile}}). }
+\item{qtype}{ an integer between 1 and 9 indicating which one of the nine quantile algorithms to use (see \code{\link{quantile}}). }
 \item{data}{ a data.frame (or list) from which the variables in \code{formula} should be taken. }
 \item{width}{ a vector giving the relative widths of the boxes making up the plot. }
 \item{varwidth}{ if \code{varwidth} is \code{TRUE}, the boxes are drawn with widths proportional to the square-roots of the number of observations in the groups. }
-\item{outline}{ if \code{outline} is not \code{TRUE}, the outliers are not drawn. }
+\item{outline}{ if \code{outline} is \code{FALSE}, the outliers are not drawn. }
 \item{names}{ group labels which will be printed under each boxplot. }
 \item{plot}{ if \code{TRUE} then a boxplot is produced. If not, the summaries which the boxplots are based on are returned. }
 \item{border}{ an optional vector of colours for the outlines of the boxplots. The values in \code{border} are recycled if the length of \code{border} is less than the number of plots. }
@@ -31,7 +31,7 @@ qboxplot(x, range=1.5, probs=c(0.25,0.5,0.75), qtype=7, data=parent.frame(),
 }
 \value{
 List with the following components:
-\item{stats}{ a matrix, each column contains the extreme of the lower whisker, the lower hinge, the midpoint (i.e. probs[2]), the upper hinge and the extreme of the upper whisker for one group/plot. }
+\item{stats}{ a matrix, each column contains the extreme of the lower whisker, the lower hinge, the midpoint, the upper hinge and the extreme of the upper whisker for one group/plot. }
 \item{n}{ a vector with the number of observations in each group. }
 \item{out}{ the values of any data points which lie beyond the extremes of the whiskers. }
 \item{group}{ a vector of the same length as \code{out} whose elements indicate to which group the outlier belongs. }
@@ -56,10 +56,9 @@ mat = cbind(Uni05=(1:100)/21, Norm=rnorm(100), "5T"=rt(100,df=5),
 qboxplot(as.data.frame(mat))
 
 #Example 5
-qboxplot(len~dose, data=ToothGrowth, boxwex=0.25, at=1:3-0.2,
-         subset=ToothGrowth$supp=="VC", col="yellow",
-         main="Guinea Pigs' Tooth Growth", xlab="Vitamin C dose mg",
-         ylab="Tooth length", xlim=c(0.5,3.5), ylim=c(0,35), yaxs="i")
+data = c(102,133,136,139,142,144,146,151,160,174)
+qboxplot(data.frame(data), range=1.5, probs=c(0.25,0.5,0.75), qtype=1,
+         ylim=c(100,220), horizontal=TRUE)
 
 }
 \keyword{qboxplot}
